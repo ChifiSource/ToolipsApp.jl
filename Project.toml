@@ -1,0 +1,8 @@
+name = "ToolipsApp"
+uuid = "1a17b8a0-6d87-44bd-b8cc-42f034d60172"
+authors = ["emmac "]
+version = "0.1.0"
+
+[deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+Toolips = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"
