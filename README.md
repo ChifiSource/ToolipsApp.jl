@@ -1,2 +1,24 @@
+<img src = "https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/logo.jpg"></img>
 # ToolipsApp
-A webapp for testing Toolips.jl. For now, you might get an error printout for the logger when you start the server, note that the server is still started regardless as to whether or not the logfile directory is findable.
+A webapp for testing Toolips.jl. This webapp provides numerous examples of how Toolips.jl can be used and how the software works in its current state.
+### Get it working
+Getting this web app working is incredibly simple. Step one is to git a clone of this repository.
+```bash
+git clone https://github.com/emmettgb/ToolipsApp.jl
+```
+Next, you will need to activate the project environment in Julia.
+```bash
+cd ToolipsApp
+julia
+```
+```julia
+using Pkg; Pkg.activate(".")
+```
+Lastly, include the project file.
+```julia
+include("src/ToolipsApp.jl")
+[2022-03-28T14:51:22.108]: Toolips Server starting on port 8003
+[2022-03-28T14:51:22.498]: Successfully started server on port 8003
+[2022-03-28T14:51:22.950]: You may visit it now at http://127.0.0.1:8003
+```
+
