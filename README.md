@@ -1,6 +1,8 @@
 <img src = "https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/logo.jpg"></img>
 # ToolipsApp
-A webapp for testing Toolips.jl. This webapp provides numerous examples of how Toolips.jl can be used and how the software works in its current state.
+A webapp for testing and demonstrating Toolips.jl. This webapp provides numerous examples of how Toolips.jl can be used and how the software works in its current state. As of right now, it has a stream-writing story-teller, and a text editor. This is all done in pure Julia, there is no Javascript involved although there likely will be in the future. \
+[What is a Toolips?](https://github.com/ChifiSource/Toolips.jl)
+<img src = https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/toolipsappsc.png></img>
 ### Get it working
 Getting this web app working is incredibly simple. Step one is to git a clone of this repository.
 ```bash
