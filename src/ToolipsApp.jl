@@ -1,22 +1,23 @@
-# Welcome to your new Toolips server!
+module ToolipsApp
 using Toolips
-PUBLIC = "public"
-IP = "127.0.0.1"
-PORT = 8003
-include("Home.jl")
-include("Text_editor.jl")
-function main()
-        # Essentials
-    global LOGGER = Logger()
-    routes = []
-    server_template = ServerTemplate(IP, PORT, routes , logger = LOGGER)
-    server_template.add(Route("404", fn(four04)))
-    server_template.add(Route("/", home))
-    server_template.add(Route("/text-editor", te))
-    server_template.add(Route("/text-editor/open", texteditsc))
-    server_template.add(Route("/text-editor/save", fn(saver)))
-    global TLSERVER = server_template.start()
-    return(TLSERVER)
+using JSON
+include("home.jl")
+
+function reroute!(ws::WebServer)
+    route!(ws, "/", home)
+    route!(ws, "/gallery", gallery)
 end
-four04 = http -> write(http, "<h1>404, not found</h1>")
-main()
+
+function start(IP::String, PORT::Integer, extensions::Dict)
+    fourofour = route("404") do c
+        write!(c, p("404message", text = "404, not found!"))
+    end
+    homeroute = route("/", home)
+    galleryroute = route("/gallery", gallery)
+    teamroute = route("/team", team)
+    rs = routes(homeroute, fourofour, galleryroute, teamroute)
+    server = ServerTemplate(IP, PORT, rs, extensions = extensions)
+    server.start()
+end
+
+end # - module

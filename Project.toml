@@ -1,8 +1,10 @@
 name = "ToolipsApp"
-uuid = "1a17b8a0-6d87-44bd-b8cc-42f034d60172"
+uuid = "c6cceedd-54e2-4edc-9abc-8b87dca2b837"
 authors = ["emmac "]
 version = "0.1.0"
 
 [deps]
-HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+ParseNotEval = "8aa82b3d-5f10-4499-b4c6-079a0c256bc8"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 Toolips = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"
