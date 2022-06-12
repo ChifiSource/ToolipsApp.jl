@@ -1,5 +1,4 @@
 <img src = "https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/logo.jpg"></img>
-# ToolipsApp
 A webapp built in [toolips](https://ChifiSource/Toolips.jl) which acts as a central hub for Toolips.jl extensions and web-sites.
 [What is a Toolips?](https://github.com/ChifiSource/Toolips.jl)
 <img src = https://github.com/ChifiSource/ToolipsApp.jl/blob/ToolipsApp-2/public/Screenshot%20from%202022-06-12%2009-46-47.png href = "https://toolips.app"></img>
