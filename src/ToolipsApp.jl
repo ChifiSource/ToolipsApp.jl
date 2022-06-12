@@ -8,7 +8,8 @@ function reroute!(ws::WebServer)
     route!(ws, "/gallery", gallery)
 end
 
-function start(IP::String, PORT::Integer, extensions::Dict)
+function start(IP::String, PORT::Integer,
+    extensions::Dict = Dict(:files => Files("public"), :logger => Logger())
     fourofour = route("404") do c
         write!(c, p("404message", text = "404, not found!"))
     end
