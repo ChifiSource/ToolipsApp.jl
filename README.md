@@ -1,7 +1,5 @@
-<img src = "https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/logo.jpg"></img>
-A webapp built in [toolips](https://ChifiSource/Toolips.jl) which acts as a central hub for Toolips.jl extensions and web-sites.
-[What is a Toolips?](https://github.com/ChifiSource/Toolips.jl)
 <img src = https://github.com/ChifiSource/ToolipsApp.jl/blob/ToolipsApp-2/public/Screenshot%20from%202022-06-12%2009-46-47.png href = "https://toolips.app"></img>
+##### A webapp built in [toolips](https://ChifiSource/Toolips.jl) which acts as a central hub for Toolips.jl extensions and web-sites.
 ### Get it working
 As far as starting or working with toolips project, we can do so in one of two ways.
 - You may add the **Module** with Pkg. This is ideal for projects that have easy start methods. In toolips, websites are regular Julia modules.
