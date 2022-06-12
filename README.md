@@ -1,26 +1,18 @@
-<img src = "https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/logo.jpg"></img>
-# ToolipsApp
-A webapp for testing and demonstrating Toolips.jl. This webapp provides numerous examples of how Toolips.jl can be used and how the software works in its current state. As of right now, it has a stream-writing story-teller, and a text editor. This is all done in pure Julia, there is no Javascript involved although there likely will be in the future. \
-[What is a Toolips?](https://github.com/ChifiSource/Toolips.jl)
-<img src = https://github.com/emmettgb/ToolipsApp.jl/blob/main/public/toolipsappsc.png></img>
+<img src = https://github.com/ChifiSource/ToolipsApp.jl/blob/ToolipsApp-2/public/Screenshot%20from%202022-06-12%2009-46-47.png href = "https://toolips.app"></img>
+##### A webapp built in [toolips](https://ChifiSource/Toolips.jl) which acts as a central hub for Toolips.jl extensions and web-sites.
 ### Get it working
-Getting this web app working is incredibly simple. Step one is to git a clone of this repository.
-```bash
-git clone https://github.com/emmettgb/ToolipsApp.jl
-```
-Next, you will need to activate the project environment in Julia.
-```bash
-cd ToolipsApp
-julia
-```
+As far as starting or working with toolips project, we can do so in one of two ways.
+- You may add the **Module** with Pkg. This is ideal for projects that have easy start methods. In toolips, websites are regular Julia modules.
 ```julia
-using Pkg; Pkg.activate(".")
-```
-Lastly, include the project file.
-```julia
-include("src/ToolipsApp.jl")
-[2022-03-28T14:51:22.108]: Toolips Server starting on port 8003
-[2022-03-28T14:51:22.498]: Successfully started server on port 8003
-[2022-03-28T14:51:22.950]: You may visit it now at http://127.0.0.1:8003
-```
+using Pkg; Pkg.add(url = "https://github.com/emmettgb/ToolipsApp.jl/")
+using ToolipsApp
 
+ToolipsAppServer = ToolipsApp.start("127.0.0.1", 8000)
+```
+- Or you can git clone the module and use the module's files. This is ideal if you want to actually host the module, or just if the module was designed to run with environmental variables.
+
+```julia
+shell> git clone https://github.com/ChifiSource/ToolipsApp.jl/
+shell> cd ToolipsApp.jl
+julia> include("dev.jl")
+```
