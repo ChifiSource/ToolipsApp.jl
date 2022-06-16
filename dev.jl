@@ -6,9 +6,18 @@ with modularity.
 using Pkg; Pkg.activate(".")
 using Toolips
 using Revise
+using ToolipsSession
+using ToolipsApp
 
 IP = "127.0.0.1"
 PORT = 8000
-extensions = Dict(:logger => Logger(), :public => Files("public"))
-using ToolipsApp
+
+function remote_control(c::Connection)
+    input = getarg(c, :in)
+    c[:logger].log("input")
+end
+
+
+extensions = [Logger(), Session(), Files()]
+
 ToolipsAppServer = ToolipsApp.start(IP, PORT, extensions)

@@ -4,7 +4,7 @@ function fade_up()
     fup[:from] = :opacity => "0%"
     fup[:to] = :opacity => "100%"
     fup[:to] = :transform => "translateY(0%)"
-    return(fup)
+    fup
 end
 
 function nav_in()
@@ -37,55 +37,48 @@ p_style() = begin
     ps
 end
 
+function navbar_s(out = false)
+    if out
+        nout = Style("navbar_out")
+        animate!(nout, nav_out())
+        return(nout)
+    else
+        nout = Style("navbar_in")
+        animate!(nout, nav_in())
+        return(nout)
+    end
+end
+
+
 homestyles() = components(title(text = "toolips app"),
-logo_style(), p_style(),
-link("exampy",  href = "'styles/main_styles.css'", rel = "stylesheet"),
+logo_style(), nav_out(), nav_in(), p_style(),
+link("mainss",  href = "'styles/main_styles.css'", rel = "stylesheet"),
     link("Sofia", rel = "stylesheet",
         href = "https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:wght@100&family=Rubik:wght@500&display=swap"))
 
 # --------------
 
-function navbar(links::Vector{Pair{String, String}}, ref = false)
-    ds = "'animation-name: nav_in; animation-duration: 3s;'"
-    if ref == true
-        ds = "'animation-name: nav_out; animation-duration: 2s; opacity: 0%;'"
-    end
-    navbardiv = divider("navbardiv", class = "page", align = "center",
-    style = ds)
+function navbar(links::Vector{Pair{String, String}})
+    navbardiv = divider("navbardiv", class = "page", align = "center")
     navbar = ul("navbar", class = "'menu__list r-list'")
+    as = []
     for link in links
         lnknme = link[1]
         list_item = li("li-$lnknme")
         list_item[:class] = "menu__group"
         aitem = a("$lnknme", href = link[2], text = link[1],
-        class = "'menu__link r-link text-underlined'", style = "'text-color: blue;'")
+        class = "'menu__link r-link text-underlined'", style =
+        "'text-color: blue;'")
+        push!(as, aitem)
         push!(list_item, aitem)
         push!(navbar, list_item)
     end
     push!(navbardiv, navbar)
-    navbardiv
+    navbardiv, as
 end
 
 # ---------------
-
-function home(c::Connection)
-    args = Dict()
-    try
-        args = getargs(c)
-    catch
-        args = Dict()
-    end
-    if :pull in keys(args)
-        navigate(c, args[:pull])
-    else
-        main(c)
-    end
-end
-
-function navigate(c::Connection, pull::String)
-    home_ref(c, pull)
-end
-
+#==
 function team(c::Connection)
     navs = ["< back" => "/",
         "join" => "/join", "sponsor" => "/join"]
@@ -119,57 +112,27 @@ function team(c::Connection)
     end
     write!(c, teammem)
 end
-
-function gallery(c::Connection)
-    navs = ["< back" => "/",
-        "Extensions" => "/gallery?filter=sextensions",
-        "Components" => "/gallery?filter=components",
-        "Sites" => "/gallery/?filter=sites"]
-    write!(c, homestyles())
-    header_div = divider("header_div", align = "center")
-    style!(header_div, "margin-top" => "250px")
-    logo = img("tl_logo", src = "/images/toolips.png")
-    push!(header_div, logo)
-    nav = navbar(navs)
-    push!(header_div, p("g", text = "gallery"))
-    write!(c, header_div)
-    write!(c, nav_in())
-    write!(c, nav)
-end
-
+==#
 function main(c::Connection)
     navs = ["gallery" => "/?pull=gallery",
         "team" => "/?pull=team", "Documentation" => "/doc"]
+
+    header_div = divider("header_div", align = "center")
+    logos = logo_style()
+    logo = img("tl_logo", src = "/images/toolips.png")
+
+    nav, as = navbar(navs)
+    on(c, header_div, "click") do cm::ComponentModifier
+        animate!(cm, nav, nav_out())
+        remove!(cm, nav)
+    end
+    write!(c, navbar_s(true))
+    style!(header_div, "margin-top" => "250px")
+    style!(header_div, logos)
+    push!(header_div, logo)
+    push!(header_div, p("g", text = "v 0.1.0"))
+    write!(c, header_div)
+    write!(c, nav)
     write!(c, fade_up())
     write!(c, homestyles())
-    header_div = divider("header_div", align = "center")
-    style!(header_div, "margin-top" => "250px")
-    logos = logo_style()
-    style!(header_div, logos)
-    logo = img("tl_logo", src = "/images/toolips.png")
-    push!(header_div, logo)
-    nav = navbar(navs)
-    push!(header_div, p("g", text = "v 0.1.0"))
-    write!(c, header_div)
-    write!(c, nav_in())
-    write!(c, nav)
-end
-
-function home_ref(c::Connection, link::String)
-    navs = ["gallery" => "/?pull=gallery",
-        "team" => "/?pull=team", "Documentation" => "/doc"]
-    write!(c, homestyles())
-    header_div = divider("header_div", align = "center")
-    style!(header_div, "margin-top" => "250px")
-    logo = img("tl_logo", src = "/images/toolips.png")
-    push!(header_div, logo)
-    nav = navbar(navs, true)
-    push!(header_div, p("g", text = "v 0.1.0"))
-    write!(c, header_div)
-    write!(c, nav_out())
-    write!(c, nav)
-
-    write!(c, script("", text = """setTimeout(function(){
-            window.location.href = '/$link';
-         }, 2000);"""))
 end
