@@ -1,4 +1,4 @@
-<img src = https://github.com/ChifiSource/ToolipsApp.jl/blob/ToolipsApp-2/public/Screenshot%20from%202022-06-12%2009-46-47.png href = "https://toolips.app"></img>
+<img src = "https://github.com/ChifiSource/image_dump/blob/main/toolips/toolipsapp.png" href = "https://toolips.app"></img>
 ##### A webapp built in [toolips](https://ChifiSource/Toolips.jl) which acts as a central hub for Toolips.jl extensions and web-sites.
 ### Get it working
 As far as starting or working with toolips project, we can do so in one of two ways.
