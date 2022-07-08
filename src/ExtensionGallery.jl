@@ -8,7 +8,7 @@ markdown_tmd = tmd"""# Markdown
 hello world"""
 function extension_section(name::String, logodir::String, md::Component,
     examples::Component)
-    sec = section("name", align = "left")
+    sec = section(name, align = "left")
     push!(sec, img("logo$name", src = logodir), md, examples)
     sec
 end
@@ -44,7 +44,7 @@ function gallery(c::Connection)
 
     greet_tmd["align"] = "left"
     style!(greet_tmd, "margin-left" => "50px")
-    tllogo = img("tllogo", src = "toolips/toolipsapp.png")
+    tllogo = img("tllogo", src = "extensiongallery.png")
     overview = section("overview", align = "center")
     push!(overview, tllogo, greet_tmd)
     #==
@@ -55,7 +55,32 @@ function gallery(c::Connection)
     #==
     Session
     ==#
-    sessionsection = section("session")
+    session_example = section()
+    session_tmd = tmd"""# Toolips Session
+    Toolips session provides toolips with full-stack capabilities using declarative
+    mutating syntax."""
+    sessionsection = extension_section("session", "toolips/toolipssession.png",
+            session_tmd, session_example)
+    push!(sections, sessionsection)
+    #==
+    Defaults
+    ==#
+    defaults_example = section("defaults_example")
+    defaults_tmd = tmd"""# Toolips Defaults
+    Toolips Defaults brings tons of additional components, as well as default
+    styles and ColorSchemes.
+    ## Styles
+    Toolips defaults provides some default styles to help get you started.
+    Below is a preview of the default styles which are not applied to Components.
+    Even better, this `stylesheet()` method call is customizable! We can provide
+    it with ColorSchemes, and edit it like any other Style Component to set the
+    default styles for our website. For example, in the ToolipsApp.jl module
+        (the website you are on, welcome)
+    ## Default Components
+    """
+    defaultssection = extension_section("defaults", "toolips/toolipsdefaults.png",
+            defaults_tmd, defaults_example)
+    push!(sections, defaultssection)
     #==
     Markdown
     ==#
@@ -67,7 +92,7 @@ function gallery(c::Connection)
     mdbox = divider("mdbox", contenteditable = true, text = "# ToolipsMarkdown Example",
     align = "left")
     style!(mdbox, "border-width" => "1px", "border-color" => "orange", "border-style" => "dashed",
-    "display" => "inline-block", "overflow-y" => "scroll", "width" => "500px",
+    "display" => "inline-block", "overflow-y" => "scroll", "width" => "50%",
     "height" => "200px")
     tmdbox = divider("tmdbox")
     style!(tmdbox, "border-width" => "1px", "border-color" => "orange", "border-style" => "dashed",
@@ -81,6 +106,16 @@ function gallery(c::Connection)
     push!(markdownviewer, mdbox, tmdbox)
     push!(markdownsection, markdown_logo, markdown_tmd, markdownviewer)
     push!(sections, markdownsection)
+    #==
+    Base64
+    ==#
+    b64_example = section()
+    b64_tmd = tmd"""# Toolips Base64
+
+    """
+    b64section = extension_section("base64", "toolips/toolipsbase64.png",
+            b64_tmd, b64_example)
+    push!(sections, b64section)
     #==
     Uploader
     ==#
@@ -107,6 +142,16 @@ function gallery(c::Connection)
     push!(uploadersection, uploader_logo, uploader_vlink, uploader_tmd,
      myuploader, uploaderbox)
      push!(sections, uploadersection)
+     #==
+     Memwrite
+     ==#
+     memwrite_example = section()
+     memwrite_tmd = tmd"""# Toolips MemWrite
+
+     """
+     memwritesection = extension_section("memwrite", "toolips/toolipsmemwrite.png",
+             memwrite_tmd, memwrite_example)
+     push!(sections, memwritesection)
      #==
      Contribute
      ==#
