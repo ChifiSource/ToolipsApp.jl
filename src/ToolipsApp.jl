@@ -5,21 +5,24 @@ by team
 [toolips](https://github.com/orgs/ChifiSource/teams/toolips)
 This software is MIT-licensed.
 ### ToolipsApp
-
-##### Extensions
-ToolipsApp is a showcase of the capabilities of Toolips with extensions, as well
-as just how easy to make extensions really are. That in mind, thos application
-features several ServerExtensions, and Servable extensions.
--
--
--
+ToolipsApp is a showcase of the capabilities of toolips as well as a documentation
+hub!
 ##### Module Composition
-- [**Toolips**](https://github.com/ChifiSource/ToolipsApp.jl)
+- [**ToolipsApp**](https://github.com/ChifiSource/ToolipsApp.jl)
 """
 module ToolipsApp
-using Toolips, ToolipsSession
+using Toolips
 using JSON
+using Toolips
+using ToolipsSession
+using ToolipsDefaults
+using ToolipsUploader
+using ToolipsBase64
+using ToolipsMarkdown
+using ToolipsMarkdown: @tmd_str
+
 include("home.jl")
+
 """
 ### rerooute(ws::WebServer)
 This function updates the routes with the files available during server operation.
@@ -57,5 +60,4 @@ function start(IP::String = "127.0.0.1", PORT::Integer = 8000,
     server = ServerTemplate(IP, PORT, rs, extensions = extensions)
     server.start()
 end
-
 end # - module

@@ -5,19 +5,16 @@ with modularity.
 ==#
 using Pkg; Pkg.activate(".")
 using Toolips
-using Revise
 using ToolipsSession
+using ToolipsRemote
+using ToolipsUploader
+using Revise
 using ToolipsApp
 
 IP = "127.0.0.1"
 PORT = 8000
 
-function remote_control(c::Connection)
-    input = getarg(c, :in)
-    c[:logger].log("input")
-end
 
-
-extensions = [Logger(), Session(), Files()]
+extensions = [Logger(), Session(["/", "/extensions"]), Files(), Remote(), Uploader()]
 
 ToolipsAppServer = ToolipsApp.start(IP, PORT, extensions)
