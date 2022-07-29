@@ -12,15 +12,12 @@ hub!
 """
 module ToolipsApp
 using Toolips
-using JSON
-using Toolips
 using ToolipsSession
 using ToolipsDefaults
 using ToolipsUploader
 using ToolipsBase64
 using ToolipsMarkdown
 using ToolipsMarkdown: @tmd_str
-
 include("home.jl")
 
 """

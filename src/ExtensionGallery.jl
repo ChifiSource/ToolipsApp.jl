@@ -21,7 +21,7 @@ uploader_vlink = tmd"""[![version](https://juliahub.com/docs/Toolips/version.svg
 uploader_tmd = tmd"""# Uploader
 The toolips uploader extension makes it incredibly easy to upload and work with
 files from a client's machine. Below is an example where you can upload a
-markdown file, and the markdown file is prompty returned into a divider with
+markdown file, and the markdown file is prompty returned into a div with
 toolips markdown."""
 
 """
@@ -85,18 +85,18 @@ function gallery(c::Connection)
     Markdown
     ==#
     markdownsection = section("markdown")
-    markdownviewer = divider("mdcreator", align = "left")
+    markdownviewer = div("mdcreator", align = "left")
     style!(markdownviewer, "background-color" => "white", "border-style" => "solid",
     "border-width" => "2px", "border-color" => "gray", "border-radius" => "10px",
      "transition" => "1s")
-    mdbox = divider("mdbox", contenteditable = true, text = "# ToolipsMarkdown Example",
+    mdbox = div("mdbox", contenteditable = true, text = "# ToolipsMarkdown Example",
     align = "left")
     style!(mdbox, "border-width" => "1px", "border-color" => "orange", "border-style" => "dashed",
     "display" => "inline-block", "overflow-y" => "scroll", "width" => "50%",
     "height" => "200px")
-    tmdbox = divider("tmdbox")
+    tmdbox = div("tmdbox")
     style!(tmdbox, "border-width" => "1px", "border-color" => "orange", "border-style" => "dashed",
-    "display" => "inline-block", "overflow-y" => "scroll", "width" => "900px",
+    "display" => "inline-block", "overflow-y" => "scroll", "width" => "50%",
     "height" => "200px")
     push!(tmdbox, tmd("mytmd", "# ToolipsMarkdown Example"))
     on(c, mdbox, "keydown") do cm::ComponentModifier
@@ -109,34 +109,49 @@ function gallery(c::Connection)
     #==
     Base64
     ==#
-    b64_example = section()
+#==    b64_example = section()
+    b64imgbox = base64img("myb64", src = "",
+        text = "provide a URL to show a png file.")
+    b64urlbox = a("myb64_urlbox", text = "")
+    style!(urlbox, "background-color" => "white")
+    b64urlbox_observer = observer(c, "urlbox_observer", 30000) do cm::ComponentModifier
+        println("test")
+    end
+    on(c, urlbox, "focusenter") do cm::ComponentModifier
+        append!(cm, "maindiv", b64urlbox_observer)
+    end
+    on(c, urlbox, "focusleave") do cm::ComponentModifier
+        remove!(cm, "urlbox_observer")
+    end
     b64_tmd = tmd"""# Toolips Base64
-
+    Toolips Base64 allows the transition of raw image data into a toolips Component
+    via the Base64 format.
     """
     b64section = extension_section("base64", "toolips/toolipsbase64.png",
             b64_tmd, b64_example)
     push!(sections, b64section)
+    ==#
     #==
     Uploader
     ==#
     uploadersection = section("uploader")
-    uploaderbox = divider("uploaderbox")
+    uploaderbox = div("uploaderbox")
     style!(uploaderbox, "background-color" => "white", "border-style" => "solid",
     "border-width" => "2px", "border-color" => "gray", "border-radius" => "10px",
     "overflow-y" => "scroll", "height" => "0px", "transition" => "1s")
     myuploader = ToolipsUploader.fileinput(c,
-    "pizza") do cm::ComponentModifier, file::String
+    "pizza") do fm
         try
-            readstr = read(file, String)
-            style!(cm, uploaderbox, "height" => "250px")
-            set_children!(cm, "uploaderbox", components(tmd("customtmd", readstr)))
+            readstr = read(fm, String)
+            style!(fm, uploaderbox, "height" => "250px")
+            set_children!(fm, "uploaderbox", components(tmd("customtmd", readstr)))
         catch
-            rm(file)
+            rm(fm.file.dir)
             errora = a("errora",
             text = "Error! You probably uploaded the wrong type of file, didn't you?")
             style!(errora, "color" => "red")
-            style!(cm, uploaderbox, "height" => "20px")
-            set_children!(cm, "uploaderbox", components(errora))
+            style!(fm, uploaderbox, "height" => "20px")
+            set_children!(fm, "uploaderbox", components(errora))
         end
     end
     push!(uploadersection, uploader_logo, uploader_vlink, uploader_tmd,
@@ -153,26 +168,38 @@ function gallery(c::Connection)
              memwrite_tmd, memwrite_example)
      push!(sections, memwritesection)
      #==
+     Remote
+     ==#
+     remote_example = section()
+     remote_tmd = tmd"""# Toolips MemWrite
+
+     """
+     remotesection = extension_section("remote", "toolips/toolipsmemwrite.png",
+             memwrite_tmd, memwrite_example)
+     push!(sections, memwritesection)
+     #==
      Contribute
      ==#
+     contrib_example = section()
+     contrib_tmd = tmd"""# Toolips MemWrite
 
+     """
+     contribsection = extension_section("contribute", "toolips/toolipsmemwrite.png",
+             contrib_tmd, contrib_example)
+     push!(sections, contribsection)
     #==
     Main
     ==#
-    maindiv = divider("maindiv", align = "center", selected = "#")
-    style!(maindiv, "border-radius" => "25px", "border-style" => "solid",
-    "border-color" => "lightblue", "margin-top" => "100px",
-    "background" => "linear-gradient(#99CCED, #C4FEFF)", "transition" => "3s",
-    "margin-left" => "0px", "margin" => "0px")
-    overviewbuttons = divider("overviewbuttons", align = "center")
+    maindiv = div("gallery", align = "center", selected = "#", "overflow-x" => "hidden !important")
+    overviewbuttons = div("overviewbuttons", align = "center")
     backbutton = button("backbutton", text = "go back")
     backbutton["width"] = "100%"
     style!(backbutton, "background-color" => "red !important")
     on(c, backbutton, "click") do cm::ComponentModifier
-        set_children!(cm, "maindiv", sections)
-        cm["maindiv"] = "selected" => "#"
+        set_children!(cm, maindiv, sections)
+        cm[maindiv] = "selected" => "#"
     end
-    backdiv = divider("backdiv", align = "left")
+    backdiv = div("backdiv", align = "left")
     push!(backdiv, backbutton)
     for section in sections
         sectionname = section.name
