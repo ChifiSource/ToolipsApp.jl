@@ -84,7 +84,7 @@ function gallery(c::Connection)
     #==
     Markdown
     ==#
-    markdownsection = section("markdown")
+    markdownsection = section("markdown", align = "left")
     markdownviewer = div("mdcreator", align = "left")
     style!(markdownviewer, "background-color" => "white", "border-style" => "solid",
     "border-width" => "2px", "border-color" => "gray", "border-radius" => "10px",
@@ -134,7 +134,7 @@ function gallery(c::Connection)
     #==
     Uploader
     ==#
-    uploadersection = section("uploader")
+    uploadersection = section("uploader", align = "left")
     uploaderbox = div("uploaderbox")
     style!(uploaderbox, "background-color" => "white", "border-style" => "solid",
     "border-width" => "2px", "border-color" => "gray", "border-radius" => "10px",
@@ -171,20 +171,96 @@ function gallery(c::Connection)
      Remote
      ==#
      remote_example = section()
-     remote_tmd = tmd"""# Toolips MemWrite
-
+     remote_tmd = tmd"""# Toolips Remote
+     Toolips Remote is a ServerExtension that lets you connect your toolips app
+     to your Julia REPL. Usage is simple, just add the `Remote` extension to your
+     `ToolipsServer`, then use the `connect` method to connect! `Remote` uses
+     **256-bit** hashing automatically, so your passwords are protected with
+     very minimal effort!
      """
-     remotesection = extension_section("remote", "toolips/toolipsmemwrite.png",
-             memwrite_tmd, memwrite_example)
-     push!(sections, memwritesection)
+     remotesection = extension_section("remote", "toolips/toolipsremote.png",
+             remote_tmd, remote_example)
+     push!(sections, remotesection)
+     #==
+     Export
+     ==#
+     export_example = section()
+     export_tmd = tmd"""# Toolips Export
+     Toolips Export lets you create compiled executables using Toolips! Using this
+     module, you can export your toolips app to
+     - compiled desktop applications
+     - compiled servers
+     - shared libraries\n
+     With future plans for
+    - android
+    - IOS\n
+    in the pipeline!
+     """
+     exportsection = extension_section("export", "toolips/toolipsexport.png",
+             export_tmd, export_example)
+     push!(sections, exportsection)
+     #==
+     Multiple Dispatch
+     ==#
+     dispatch_example = section()
+     dispatch_tmd = tmd"""# Toolips Multiple Dispatch
+     """
+     dispatchsection = extension_section("dispatch", "toolips/toolipsmultipledispatch.png",
+             dispatch_tmd, dispatch_example)
+     push!(sections, dispatchsection)
+     #==
+     UDP
+     ==#
+     udp_example = section()
+     udp_tmd = tmd"""# Toolips UDP
+     """
+     udpsection = extension_section("udp", "toolips/toolipsudp.png",
+             udp_tmd, udp_example)
+     push!(sections, udpsection)
+     #==
+     Manager
+     ==#
+     manager_example = section()
+     manager_tmd = tmd"""# Toolips Manager
+     """
+     managersection = extension_section("manager", "toolips/toolipsmanager.png",
+             manager_tmd, manager_example)
+     push!(sections, managersection)
+     #==
+     ptp
+     ==#
+     ptp_example = section()
+     ptp_tmd = tmd"""# Toolips Peer to Peer
+     """
+     ptpsection = extension_section("ptp", "toolips/toolipsptp.png",
+             ptp_tmd, ptp_example)
+     push!(sections, ptpsection)
+     #==
+     canvas
+     ==#
+     canvas_example = section()
+     canvas_tmd = tmd"""# Toolips Canvas
+     """
+     canvassection = extension_section("canvas", "toolips/toolipscanvas.png",
+             canvas_tmd, canvas_example)
+     push!(sections, canvassection)
+     #==
+     auth
+     ==#
+     auth_example = section()
+     auth_tmd = tmd"""# Toolips Auth
+     """
+     authsection = extension_section("auth", "toolips/toolipsauth.png",
+             auth_tmd, auth_example)
+     push!(sections, authsection)
      #==
      Contribute
      ==#
      contrib_example = section()
-     contrib_tmd = tmd"""# Toolips MemWrite
+     contrib_tmd = tmd"""# Contribute!
 
      """
-     contribsection = extension_section("contribute", "toolips/toolipsmemwrite.png",
+     contribsection = extension_section("contribute", "toolips/toolipsapp.png",
              contrib_tmd, contrib_example)
      push!(sections, contribsection)
     #==

@@ -1,7 +1,8 @@
 include("ExtensionGallery.jl")
 tllogomain = img("tllogomain", src = "favicon.png", width = "30")
 tlapplogo = img("tlapplogomain", src = "toolips/toolipsapp.png")
-maingreeting = tmd"""[![version](https://juliahub.com/docs/Toolips/version.svg)](https://juliahub.com/ui/Packages/Toolips/TrAr4) \
+maingreeting = tmd"""[![version](https://juliahub.com/docs/Toolips/version.svg)](https://juliahub.com/ui/Packages/Toolips/TrAr4)
+
 # Welcome to toolips app
 This app is dedicated to the exploration of awesome toolips projects, extensions, and more!
 This project contains
@@ -33,7 +34,7 @@ function main(c::Connection)
     tlappcursor = ToolipsDefaults.cursor("tlappcursor")
     # Styles
     styles = stylesheet("toolips app !")
-    bodys = Style("body", "overflow-x" => "hidden", "overflow-y" => "hidden")
+    bodys = Style("body", "overflow-x" => "hidden")
     push!(styles, bodys)
     push!(styles, tlapp_title)
     push!(styles, kbbbuttons())
@@ -74,23 +75,25 @@ function main(c::Connection)
      bold_knotifier)
     push!(maindiv, tlapplogo, maingreeting, key_notifier, foot)
     extensiongallery = gallery(c)
-    style!(extensiongallery, "position" => "fixed",
-    "z-index" => "1", "top" => "0", "overflow-x" => "hidden !important",
-     "width" => "0", "height" => "95%",
-     "transition" => "0.8s", "margin" => "0px !important", "opacity" => "0%", "margin-left" => "0%",
-     "margin-top" => "5%", "padding-top" => "5%")
-     style!(maindiv, "transition" => ".8s", "overflow-y" => "scroll")
+    style!(extensiongallery,
+     "overflow-x" => "hidden !important",
+     "width" => "0", "transition" => "0.8s", "margin" => "0px !important", "opacity" => "0%", "margin-left" => "0%",
+     "margin-top" => 10px, "padding" => 0px, "display" => "inline-block !important",
+     "position" => "fixed")
+     style!(maindiv, "transition" => ".8s", "overflow-y" => "scroll",
+     "display" => "inline-block !important", "width" => 100percent)
     on_keydown(c, "ArrowLeft") do cm::ComponentModifier
-        style!(cm, extensiongallery, "width" => 100percent, "opacity" => "100%")
-        style!(cm, maindiv, "margin-left" => "100%")
+        style!(cm, extensiongallery, "width" => 100percent, "opacity" => "100%", "position" => "relative")
+        style!(cm, maindiv, "margin-left" => "100%", "position" => "fixed")
         style!(cm, maindiv, "opacity" => "0%")
         cm[maindiv] = "page" => "gallery"
         set_text!(cm, tlapp_title, "extension gallery|toolips")
     end
     on_keydown(c, "ArrowRight") do cm::ComponentModifier
         if cm[maindiv]["page"] == "gallery"
-            style!(cm, maindiv, "margin-left" => "0%")
-            style!(cm, extensiongallery, "opacity" => "0%", "width" => "0%", "margin-right" => "1%")
+            style!(cm, maindiv, "margin-left" => "0%", "position" => "relative")
+            style!(cm, extensiongallery, "opacity" => "0%", "width" => "0%",
+            "position" => "fixed")
             style!(cm, maindiv, "opacity" => "100%")
             cm[maindiv] = "page" => "home"
             set_text!(cm, tlapp_title, "toolips app !")
