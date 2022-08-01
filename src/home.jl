@@ -164,7 +164,6 @@ function main(c::Connection)
         observe!(c, cm, "obsl") do cm::ComponentModifier
             selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
             selpage = tlapp_pages[selpagei][2](c)
-            println(selpage.name)
             pagebehind = tlapp_pages[selpagei - 1][2](c)
             pageinfront = tlapp_pages[selpagei + 1][2](c)
             # update key text
@@ -183,7 +182,7 @@ function main(c::Connection)
             style!(cm, selpage, "transition" => "0s", "overflow-y" => "scroll",
             "display" => "inline-block !important", "width" => 100percent)
         end
-        set_text!(cm, tlapp_title, "$(selpage.name) | toolips app !")
+        set_text!(cm, tlapp_title, "$(pagebehind.name) | toolips app !")
     end
     on_keydown(c, "ArrowRight") do cm::ComponentModifier
         # get new pages
@@ -204,7 +203,6 @@ function main(c::Connection)
         observe!(c, cm, "obsl") do cm::ComponentModifier
             selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
             selpage = tlapp_pages[selpagei][2](c)
-            println(selpage.name)
             pagebehind = tlapp_pages[selpagei - 1][2](c)
             pageinfront = tlapp_pages[selpagei + 1][2](c)
             # update key text
@@ -223,7 +221,7 @@ function main(c::Connection)
             style!(cm, selpage, "transition" => "0s", "overflow-y" => "scroll",
             "display" => "inline-block !important", "width" => 100percent)
         end
-        set_text!(cm, tlapp_title, "$(selpage.name) | toolips app !")
+        set_text!(cm, tlapp_title, "$(pageinfront.name) | toolips app !")
     end
     push!(containerdiv, pagebehind, pageinfront, selpage)
     push!(bod, containerdiv)
