@@ -5,7 +5,23 @@ Toolips
 ==#
 markdown_logo = img("markdownlogo", src = "toolips/toolipsmarkdown.png", width = 300)
 markdown_tmd = tmd"""# Markdown
-hello world"""
+Toolips markdown allows for the conversion of Julia strings
+into HTML text. It is a great way to get text from a Markdown format to a
+Component format. The module only has one method and one macro, both named `tmd`.
+We can make `tmd` as we would any other Component, or by using the `tmd_str`
+macro.
+        ```julia
+        function home(c::Connection)
+                mymd = tmd("nameoftmd", "### example!")
+                write!(c, mymd)
+        end
+        ```
+        ### example!
+        ```julia
+        mymd = tmd"**this** is **tmd**"
+        ```
+        **this** is **tmd**.\n All of the markdown for toolips app is written
+        using toolips markdown!"""
 function extension_section(name::String, logodir::String, md::Component,
     examples::Component)
     sec = section(name, align = "left")
@@ -22,7 +38,9 @@ uploader_tmd = tmd"""# Uploader
 The toolips uploader extension makes it incredibly easy to upload and work with
 files from a client's machine. Below is an example where you can upload a
 markdown file, and the markdown file is prompty returned into a div with
-toolips markdown."""
+toolips markdown. The module includes both a polling file uploader and a regular
+uploader, for all of your uploading needs. Best of all, the FileModifier cleans
+up any files that are created by Uploader unless you copy them away!"""
 
 """
 gallery(c::Connection) -> _
@@ -58,7 +76,21 @@ function gallery(c::Connection)
     session_example = section()
     session_tmd = tmd"""# Toolips Session
     Toolips session provides toolips with full-stack capabilities using declarative
-    mutating syntax."""
+    mutating syntax. The module primarily provides the method `on`, along with
+    the `Session` extension and `Modifier` abstract type. Modifiers are passed
+    as an argument to functions that are recieved using event functions, such
+    as `on`.
+    ```julia
+    function home(c::Connection)
+            on(c, "load") do cm::ComponentModifier
+                    alert!(cm, "loaded!")
+            end
+    end
+    ```
+    The Session extension tracks individual client's events with an iptable.
+    This allows for the creation of one-page websites and interactivity without
+            the need for making any sort of GET requests."""
+
     sessionsection = extension_section("session", "toolips/toolipssession.png",
             session_tmd, session_example)
     push!(sections, sessionsection)
@@ -72,11 +104,20 @@ function gallery(c::Connection)
     ## Styles
     Toolips defaults provides some default styles to help get you started.
     Below is a preview of the default styles which are not applied to Components.
-    Even better, this `stylesheet()` method call is customizable! We can provide
+    Even better, this `sheet` method call is customizable! We can provide
     it with ColorSchemes, and edit it like any other Style Component to set the
     default styles for our website. For example, in the ToolipsApp.jl module
         (the website you are on, welcome)
+        ```julia
+        s = sheet("mystyle")
+        ```
     ## Default Components
+    Toolips defaults provides a number of default components, as well a
+    functions for [ToolipsSession](/?page=extensions&selected=session), `update!`.
+            Some notable examples include `anydiv`s, which allow you to comprise
+            regular Julia types into a toolips div Component with a `MIME`. There
+            are also audio Components, input Components, a `cursor` Component, and
+            more!
     """
     defaultssection = extension_section("defaults", "toolips/toolipsdefaults.png",
             defaults_tmd, defaults_example)
@@ -109,28 +150,20 @@ function gallery(c::Connection)
     #==
     Base64
     ==#
-#==    b64_example = section()
-    b64imgbox = base64img("myb64", src = "",
-        text = "provide a URL to show a png file.")
-    b64urlbox = a("myb64_urlbox", text = "")
-    style!(urlbox, "background-color" => "white")
-    b64urlbox_observer = observer(c, "urlbox_observer", 30000) do cm::ComponentModifier
-        println("test")
-    end
-    on(c, urlbox, "focusenter") do cm::ComponentModifier
-        append!(cm, "maindiv", b64urlbox_observer)
-    end
-    on(c, urlbox, "focusleave") do cm::ComponentModifier
-        remove!(cm, "urlbox_observer")
-    end
+    b64_example = section()
     b64_tmd = tmd"""# Toolips Base64
     Toolips Base64 allows the transition of raw image data into a toolips Component
-    via the Base64 format.
+    via the Base64 format. This is useful for things like image editors, computer
+    vision models, and plotting. For example, `PyPlot.jl` can only output
+    visualizations to a PNG file, so being able to make a Base64 image out of
+    this data is very useful. Doing so is also incredibly easy, just make an img
+    Component using the `base64img` method.
+    ```julia
+    ```
     """
     b64section = extension_section("base64", "toolips/toolipsbase64.png",
             b64_tmd, b64_example)
     push!(sections, b64section)
-    ==#
     #==
     Uploader
     ==#
@@ -204,6 +237,7 @@ function gallery(c::Connection)
      ==#
      dispatch_example = section()
      dispatch_tmd = tmd"""# Toolips Multiple Dispatch
+     Toolips Multiple dispatch is still a **work in progress**.
      """
      dispatchsection = extension_section("dispatch", "toolips/toolipsmultipledispatch.png",
              dispatch_tmd, dispatch_example)
@@ -213,6 +247,7 @@ function gallery(c::Connection)
      ==#
      udp_example = section()
      udp_tmd = tmd"""# Toolips UDP
+     Toolips UDP is still a **work in progress**.
      """
      udpsection = extension_section("udp", "toolips/toolipsudp.png",
              udp_tmd, udp_example)
@@ -222,15 +257,47 @@ function gallery(c::Connection)
      ==#
      manager_example = section()
      manager_tmd = tmd"""# Toolips Manager
+     Toolips Manager is still a **work in progress**.
      """
      managersection = extension_section("manager", "toolips/toolipsmanager.png",
              manager_tmd, manager_example)
      push!(sections, managersection)
      #==
+     interpolator
+     ==#
+     interpolator_example = section()
+     interpolator_tmd = tmd"""# Toolips Interpolator
+     The toolips interpolator allows for the interpolation of HTML files with
+             values and Components. This is all done through the `InterpolatedFile` `Servable`.
+             We provide Components as positional arguments and values as key-word arguments
+             with their HTML names being the keys. Here is an example HTML file to
+             be interpolated:
+             ##### index.html
+             ```html
+             <p>The cost is $price</p>
+             $product
+             ```
+             We would interpolate this like so:
+             ##### Example.jl
+             ```julia
+             function home(c::Connection)
+                    productdesc = div("product")
+                    hed = h("headinglabel", 1, text = "example")
+                    push!(productdesc, hed)
+                    file = InterpolatedFile("index.html", productdesc, price = 500)
+                    write!(c, InterpolatedFile)
+             end
+             ```
+     """
+     interpolatorsection = extension_section("interpolator", "toolips/toolipsinterpolator.png",
+             interpolator_tmd, interpolator_example)
+     push!(sections, interpolatorsection)
+     #==
      ptp
      ==#
      ptp_example = section()
      ptp_tmd = tmd"""# Toolips Peer to Peer
+     Toolips PTP is still a **work in progress**.
      """
      ptpsection = extension_section("ptp", "toolips/toolipsptp.png",
              ptp_tmd, ptp_example)
@@ -240,6 +307,7 @@ function gallery(c::Connection)
      ==#
      canvas_example = section()
      canvas_tmd = tmd"""# Toolips Canvas
+     Toolips PTP is still a **work in progress**. (this one is going to be a while...)
      """
      canvassection = extension_section("canvas", "toolips/toolipscanvas.png",
              canvas_tmd, canvas_example)
@@ -249,6 +317,7 @@ function gallery(c::Connection)
      ==#
      auth_example = section()
      auth_tmd = tmd"""# Toolips Auth
+     Toolips PTP is still a **work in progress**.
      """
      authsection = extension_section("auth", "toolips/toolipsauth.png",
              auth_tmd, auth_example)
@@ -258,7 +327,10 @@ function gallery(c::Connection)
      ==#
      contrib_example = section()
      contrib_tmd = tmd"""# Contribute!
-
+     Contribute your own extension! You can create an extension using
+     [this guide](https://doc.toolips.app/tutorial/extensions?page=3). They can also
+     be featured here on toolips app, the instructions for which are available in
+     the [toolips app contribution documentation](https://toolips.app/?page=contribute)
      """
      contribsection = extension_section("contribute", "toolips/toolipsapp.png",
              contrib_tmd, contrib_example)
@@ -287,5 +359,9 @@ function gallery(c::Connection)
         push!(overview, secbut)
     end
     maindiv[:children] = sections
+    arguments = getargs(c)
+    if :selected in keys(arguments)
+            maindiv[:children] = [backdiv, sections[arguments[:selected]]]
+    end
     maindiv
 end

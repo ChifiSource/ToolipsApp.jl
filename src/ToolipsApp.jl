@@ -49,10 +49,8 @@ end
 
 function start(IP::String = "127.0.0.1", PORT::Integer = 8000,
     extensions::Vector = [Session(), Logger()])
-    fourofour = route("404") do c
-        write!(c, p("404message", text = "404, not found!"))
-    end
     homeroute = route("/", main)
+    fourofour = route("404", notapage)
     rs = routes(homeroute, fourofour)
     server = ServerTemplate(IP, PORT, rs, extensions = extensions)
     server.start()
