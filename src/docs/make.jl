@@ -3,7 +3,8 @@ using Toolips: Servable, ServerExtension, ToolipsServer, SpoofStream
 using Toolips: SpoofConnection, StyleComponent, AbstractConnection, AbstractRoute
 using Toolips: AbstractComponent, StyleComponent
 using ToolipsSession, ToolipsMarkdown, ToolipsDefaults, ToolipsBase64
-using ToolipsRemote, ToolipsUploader, ToolipsMemWrite
+using ToolipsRemote, ToolipsUploader, ToolipsMemWrite, ToolipsExport
+using ToolipsInterpolator
 Documenter.makedocs(root = ".",
        source = "src",
        build = "../../public/docs",
@@ -26,8 +27,8 @@ Documenter.makedocs(root = ".",
                 "toolips session" => "extensions/toolips_session.md",
                 "toolips defaults" => "extensions/toolips_defaults.md",
                 "toolips markdown" => "extensions/toolips_markdown.md",
-                "toolips memwrite" => "extensions/toolips_memwrite.md",
                 "toolips base64" => "extensions/toolips_base64.md",
+                "toolips memwrite" => "extensions/toolips_memwrite.md",
                 "toolips remote" => "extensions/toolips_remote.md",
                 "toolips uploader" => "extensions/toolips_uploader.md",
                 "toolips interpolator" => "extensions/toolips_interpolator.md",

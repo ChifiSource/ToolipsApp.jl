@@ -2,6 +2,8 @@
 Toolips = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"
 ToolipsBase64 = "35c70e29-c044-44e8-ae14-cceff0bd3f12"
 ToolipsDefaults = "1710be6b-e895-498d-ba35-e3ff0dac7995"
+ToolipsExport = "d3cb9f0d-9994-4b1a-a019-873b7558f280"
+ToolipsInterpolator = "0615dd2b-a071-4e12-9695-47a059c2d365"
 ToolipsMarkdown = "33f7ff50-f2f2-41f0-8a96-482dce5c1514"
 ToolipsMemWrite = "57c31d6b-7ec9-45e4-80ae-c449616bb020"
 ToolipsRemote = "706d13b3-298e-4297-9e9a-14f4a49b71e5"

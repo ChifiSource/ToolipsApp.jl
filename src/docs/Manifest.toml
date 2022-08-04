@@ -40,6 +40,10 @@ version = "0.5.1"
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 
+[[deps.LazyArtifacts]]
+deps = ["Artifacts", "Pkg"]
+uuid = "4af54fe1-eca0-43a8-85a7-787d91b784e3"
+
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
@@ -68,9 +72,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "Random", "Sockets"]
-git-tree-sha1 = "14cb991ee7ccc6dabda93d310400575c3cae435b"
+git-tree-sha1 = "d9ab10da9de748859a7780338e1d6566993d1f25"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.1.2"
+version = "1.1.3"
 
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -81,6 +85,12 @@ uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
+
+[[deps.PackageCompiler]]
+deps = ["Artifacts", "LazyArtifacts", "Libdl", "Pkg", "Printf", "RelocatableFolders", "TOML", "UUIDs"]
+git-tree-sha1 = "52ab501c2201e140954924365ef06a36ba1d97ed"
+uuid = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
+version = "2.0.7"
 
 [[deps.ParseNotEval]]
 deps = ["Dates"]
@@ -104,6 +114,12 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
+[[deps.RelocatableFolders]]
+deps = ["SHA", "Scratch"]
+git-tree-sha1 = "cdbd3b1338c72ce29d9584fdbe9e9b70eeb5adca"
+uuid = "05181044-ff0b-4ac5-8273-598c1e38db00"
+version = "0.1.3"
+
 [[deps.ReplMaker]]
 deps = ["REPL", "Unicode"]
 git-tree-sha1 = "f8bb680b97ee232c4c6591e213adc9c1e4ba0349"
@@ -112,6 +128,12 @@ version = "0.2.7"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+
+[[deps.Scratch]]
+deps = ["Dates"]
+git-tree-sha1 = "f94f779c94e58bf9ea243e77a37e16d9de9126bd"
+uuid = "6c6a2e73-6563-6170-7368-637461726353"
+version = "1.1.1"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -129,7 +151,7 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 
 [[deps.Toolips]]
 deps = ["Crayons", "Dates", "HTTP", "ParseNotEval", "Pkg", "Sockets"]
-git-tree-sha1 = "827aa7260f159d84754e0680954ec9cba9608a1f"
+git-tree-sha1 = "8e9a36c846b0762dea34bc031dce66d0839ce600"
 repo-rev = "Unstable"
 repo-url = "https://github.com/ChifiSource/Toolips.jl.git"
 uuid = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"
@@ -149,6 +171,22 @@ git-tree-sha1 = "b73a06a3e9626b5bdd8fec518df320afb04f19dc"
 repo-rev = "main"
 repo-url = "https://github.com/ChifiSource/ToolipsDefaults.jl"
 uuid = "1710be6b-e895-498d-ba35-e3ff0dac7995"
+version = "0.1.0"
+
+[[deps.ToolipsExport]]
+deps = ["PackageCompiler", "Pkg", "TOML", "Toolips"]
+git-tree-sha1 = "a0bd6e0a0e58e9c2b5b122c2bfcba6aa875d58e1"
+repo-rev = "main"
+repo-url = "https://github.com/ChifiSource/ToolipsExport.jl"
+uuid = "d3cb9f0d-9994-4b1a-a019-873b7558f280"
+version = "0.1.0"
+
+[[deps.ToolipsInterpolator]]
+deps = ["Toolips"]
+git-tree-sha1 = "e319db5036ce4208b6a6b3be15f00f369a818c53"
+repo-rev = "main"
+repo-url = "https://github.com/ChifiSource/ToolipsInterpolator.jl"
+uuid = "0615dd2b-a071-4e12-9695-47a059c2d365"
 version = "0.1.0"
 
 [[deps.ToolipsMarkdown]]

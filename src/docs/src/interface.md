@@ -82,22 +82,25 @@ body
 header
 footer
 Toolips.b
-DOCTYPE
+Toolips.DOCTYPE
 properties!
 getproperties
 children
 get(::AbstractComponent, ::String)
-copy
+Toolips.copy
 has_children
 push!(::AbstractComponent, ::AbstractComponent ...)
 Toolips.style!
 Toolips.:
 Toolips.animate!
-delete_keyframe!
+Toolips.delete_keyframe!
 setindex!(::Animation, ::Pair, ::Int64)
-components
+Toolips.components
 string(::AbstractComponent)
 showchildren
+Toolips.WebMeasure
+Toolips.gradient
+Toolips.rgba
 ```
 ## extensions
 ```@docs
