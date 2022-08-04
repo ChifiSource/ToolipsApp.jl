@@ -35,62 +35,72 @@ color: white; font-size: 16pt; font-weight: bold; border-style: none; cursor: po
 button:hover {background-color: orange;}
 </style>
 ```
-# core
+# Interface
 ```@docs
-AbstractRoute
-Servable
-AbstractConnection
-ServerExtension
-ToolipsServer
-Toolips.CoreException
+AbstractComponent
+StyleComponent
 ```
-## connections
+## file
 ```@docs
-SpoofStream
-Connection
-SpoofConnection
-getindex(::AbstractConnection, ::Symbol)
-getindex(::AbstractConnection, ::Type)
-setindex!(::AbstractConnection, ::Function, ::String)
-setindex!(::AbstractConnection, ::AbstractRoute, ::String)
-write!
-getargs
-getarg
-getip
-getpost
-Toolips.download!
-navigate!
-push!(::AbstractConnection, ::Any)
-Toolips.startread!(::AbstractConnection)
-route!(c::AbstractConnection, route::AbstractRoute)
-route!(::Function, ::AbstractConnection, ::String)
-unroute!(::AbstractConnection, ::String)
-routes(::AbstractConnection)
-Toolips.extensions(::AbstractConnection)
-has_extension
+File
 ```
-## routes
+## components
 ```@docs
-Route
-route
-routes
-setindex!(::Vector{AbstractRoute}, ::Function, ::String)
+Component
+Style
+Animation
+getindex(::AbstractComponent, ::Symbol)
+getindex(::AbstractComponent, ::String)
+setindex!(::AbstractComponent, ::Any, ::Symbol)
+setindex!(::Servable, ::Any, ::String)
+img
+link
+meta
+input
+a
+p
+h
+Toolips.h1
+ul
+li
+div
+divider
+br
+i
+title
+span
+iframe
+svg
+element
+label
+script
+nav
+button
+form
+section
+body
+header
+footer
+Toolips.b
+DOCTYPE
+properties!
+getproperties
+children
+get(::AbstractComponent, ::String)
+copy
+has_children
+push!(::AbstractComponent, ::AbstractComponent ...)
+Toolips.style!
+Toolips.:
+Toolips.animate!
+delete_keyframe!
+setindex!(::Animation, ::Pair, ::Int64)
+components
+string(::AbstractComponent)
+showchildren
 ```
-## servers
+## extensions
 ```@docs
-WebServer
-ServerTemplate
-getindex(::ToolipsServer, ::Symbol)
-routes(::ToolipsServer)
-Toolips.extensions(::ToolipsServer)
-kill!(::ToolipsServer)
-kill!(::ServerTemplate)
-route!(::Function, ::ToolipsServer, ::String)
-route!(::ToolipsServer, ::String, ::Function)
-route!(::ToolipsServer, ::AbstractRoute)
-```
-## requests
-```@docs
-get(::String)
-post
+Logger
+Files
 ```

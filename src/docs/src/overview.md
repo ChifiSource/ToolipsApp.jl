@@ -138,11 +138,46 @@ using Toolips
 ws = WebServer("127.0.0.1", 8000, extensions = [Logger(), Files()])
 ws[:Logger].log("hello!")
 ```
+```@example
+using Toolips
+
+st = ServerTemplate("127.0.0.1", 8000, extensions = [Logger(), Files()])
+show(st)
+```
 # creating web-apps
 Creating a web-app with toolips using the `new_webapp` method will add the extensions `Files` and `Session` to your server. The `Files` extension adds routes to your server for files stored inside of a particular directory, and the `Session` extension is used to bring full-stack functionality to toolips.
 ## files
 Handling files with the `Files` extension is incredibly easy, simply add `Files(::String)` where the single positional argument is your directory from your project folder; by default this is `public`.
 ```@example
-ws = WebServer("127.0.0.1", 8000, extensions = [Logger(), Files()])
+ws = WebServer("127.0.0.1", 8000, extensions = [Logger(), Files("public")])
 ```
 ## session
+The session extension is a fullstack extension for toolips. You can view a full api reference for this extension [here](/extensions/toolips_session/). `Session` is a ServerExtension, and can be loaded just like any other ServerExtension.
+- **positional arguments**
+- activeroutes**::Vector{String}** = ["/"]
+- **key-word arguments**
+- transitionduration**::AbstractFloat** = 0.5
+- transition**::String** = "ease-in-out"
+- timeout**::Integer** = 30\n
+`activeroutes` determines which routes `Session` should run on. The two transitions provide defaults for style transitions changed with the ComponentModifier, and timeout is an `Integer`, in minutes, of how long we want a session to continue last before timing out.
+```@example
+ws = WebServer(extensions = [Logger(), Session(["/", "/extensions/"], timeout = 1)])
+```
+Session primarily exports this `ServerExtension`, the `Servable` `ComponentModifier`, a sub-type of `Modifier`, and the `on` method. Modifiers take some HTML in a constructor and turn them into something, they can also take different arguments depending on the application. Modifiers are a lot like Connections, only they are used to respond with modifications to `Components`. The ComponentModifier can be indexed in order to get different attributes from the client, and setting the index to a `Pair` can modify the key of the pair to the value of the pair.
+```julia
+using Toolips
+using ToolipsSession
+
+changealign = route("/") do c::Connection
+  mybutton::Component{:button} = button("mybutton", align = "center", text = "click me!")
+ #c- v vvv Component  v -event
+  on(c, mybutton, "click") do cm::ComponentModifier
+    if cm[mybutton]["align"] == "center"
+      cm[mybutton] = "align" => "right"
+    else
+      cm[mybutton] = "align" => "center"
+    end
+  end
+  write!(c, mybutton)
+end
+```
