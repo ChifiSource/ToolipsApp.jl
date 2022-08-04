@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>overview · toolips</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../"><img src="../assets/logo.png" alt="toolips logo"/></a><div class="docs-package-name"><span class="docs-autofit">toolips</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><span class="tocitem">reference</span><ul><li><a class="tocitem" href="../">toolips</a></li><li class="is-active"><a class="tocitem" href>overview</a><ul class="internal"><li class="toplevel"><a class="tocitem" href="#creating-apps"><span>creating apps</span></a></li><li><a class="tocitem" href="#connections"><span>connections</span></a></li><li><a class="tocitem" href="#servables"><span>servables</span></a></li><li><a class="tocitem" href="#extensions"><span>extensions</span></a></li><li><a class="tocitem" href="#servers"><span>servers</span></a></li><li class="toplevel"><a class="tocitem" href="#creating-web-apps"><span>creating web-apps</span></a></li><li><a class="tocitem" href="#files"><span>files</span></a></li><li><a class="tocitem" href="#session"><span>session</span></a></li></ul></li><li><a class="tocitem" href="../core/">core</a></li><li><a class="tocitem" href="../extensions/">extensions</a></li><li><a class="tocitem" href="../components/">components</a></li></ul></li><li><span class="tocitem">server extensions</span><ul><li><a class="tocitem" href="../extensions/toolips_session/">toolips session</a></li><li><a class="tocitem" href="../extensions/toolips_defaults/">toolips defaults</a></li><li><a class="tocitem" href="../extensions/toolips_markdown/">toolips markdown</a></li><li><a class="tocitem" href="../extensions/toolips_memwrite/">toolips memwrite</a></li><li><a class="tocitem" href="../extensions/toolips_base64/">toolips base64</a></li><li><a class="tocitem" href="../extensions/toolips_remote/">toolips remote</a></li><li><a class="tocitem" href="../extensions/toolips_uploader/">toolips uploader</a></li><li><a class="tocitem" href="../extensions/toolips_interpolator/">toolips interpolator</a></li><li><a class="tocitem" href="../extensions/toolips_export/">toolips export</a></li><li><a class="tocitem" href="../extensions/creating_extensions/">creating extensions</a></li></ul></li><li><span class="tocitem">examples</span><ul><li><a class="tocitem" href="../examples/simple_api/">simple api</a></li><li><a class="tocitem" href="../examples/simple_website/">simple website</a></li><li><a class="tocitem" href="../examples/blog/">blog</a></li><li><a class="tocitem" href="../examples/text_editor/">text editor</a></li></ul></li><li><a class="tocitem" href="../developer_api/">developer API</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">reference</a></li><li class="is-active"><a href>overview</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>overview</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/ChifiSource/Toolips.jl" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:wght@100&family=Rubik:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body {background-color: #FDF8FF !important;}
+header {background-color: #FDF8FF !important}
+h1 {
+  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Roboto Mono', monospace !important;
+  font-family: 'Rubik', sans-serif !important;}
+
+  h2 {
+    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto Mono', monospace !important;
+    font-family: 'Rubik', sans-serif !important;}
+    h4 { color: #03045e !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-family: 'Roboto Mono', monospace !important;
+      font-family: 'Rubik', sans-serif !important;}
+      article {
+        border-radius: 30px !important;
+        border-color: lightblue !important;
+      }
+      pre {
+        border-radius: 10px !important;
+        border-color: #FFE5B4 !important;
+      }
+p {font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Rubik', sans-serif; color: #565656;}
+button {border-radius: 5px; padding: 7px; background-color: lightblue;
+color: white; font-size: 16pt; font-weight: bold; border-style: none; cursor: pointer; margin: 5px;}
+button:hover {background-color: orange;}
+</style><h1 id="overview"><a class="docs-heading-anchor" href="#overview">overview</a><a id="overview-1"></a><a class="docs-heading-anchor-permalink" href="#overview" title="Permalink"></a></h1><p>Welcome to toolips, the hyper-extensible, versatile web-development framework for Julia. This web-framework focuses on extensibility, versatility, and ease of use. This overview will reveal how the different parts of toolips come together to create basic apps, as well as functioning web-apps.</p><h1 id="creating-apps"><a class="docs-heading-anchor" href="#creating-apps">creating apps</a><a id="creating-apps-1"></a><a class="docs-heading-anchor-permalink" href="#creating-apps" title="Permalink"></a></h1><p>The first step to any toolips project is creating an app! Though you can certainly build toolips projects from <strong>normal julia modules</strong>, it is certainly quicker and more convenient to utilize the <code>Toolips.new_app</code> and <code>Toolips.new_webapp</code> methods respectively. Both of these methods take a <code>String</code>, this being your Julia project name.</p><pre><code class="language-">using Toolips
+Toolips.new_app(&quot;ExampleApp&quot;)</code></pre><article class="docstring"><header><a class="docstring-binding" id="Toolips.new_app" href="#Toolips.new_app"><code>Toolips.new_app</code></a> — <span class="docstring-category">Function</span></header><section><div><p><strong>Core</strong></p><p><strong>new_app(::String) -&gt; _</strong></p><hr/><p>Creates a minimalistic app, usually used for creating APIs and endpoints.</p><p><strong>example</strong></p><pre><code class="language-none">using Toolips
+Toolips.new_app(&quot;ToolipsApp&quot;)</code></pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="Toolips.new_webapp" href="#Toolips.new_webapp"><code>Toolips.new_webapp</code></a> — <span class="docstring-category">Function</span></header><section><div><p><strong>Core</strong></p><p><strong>new_webapp(::String) -&gt; _</strong></p><hr/><p>Creates a fully-featured Toolips web-app. Adds ToolipsSession, ideal for full-stack web-sites.</p><p><strong>example</strong></p><pre><code class="language-none">using Toolips
+Toolips.new_webapp(&quot;ToolipsApp&quot;)</code></pre></div></section></article><p>This will create a new Julia project with a <code>dev.jl</code> file and a <code>prod.jl</code> file, along with</p><h2 id="connections"><a class="docs-heading-anchor" href="#connections">connections</a><a id="connections-1"></a><a class="docs-heading-anchor-permalink" href="#connections" title="Permalink"></a></h2><p>Connections hold the routes, a selection of extensions, and the <code>HTTP.Stream</code> for the server. An <code>AbstractConnection</code> can also hold more depending on its type. Connections are passed as arguments into routes. We can write a route with this argument by either writing a function or by using the <code>route</code> syntax. Connections are written to using the <code>write!</code> method.</p><pre><code class="language-julia">using Toolips
+
+# function
+function home(c::Connection)
+  write!(c, &quot;hello world!&quot;)
+end
+
+homeroute = route(&quot;/&quot;, home)
+# route/do
+homeroute = route(&quot;/&quot;) do c::Connection
+  write!(c, &quot;hello world!&quot;)
+end</code></pre><pre class="documenter-example-output">Route(&quot;/&quot;, Main.##ex-#368.var&quot;#1#2&quot;())</pre><p>Connections can be indexed with a <code>Symbol</code> to yield a ServerExtension of that name, or indexed with a <code>String</code> to yield that route&#39;s function. They can also be rerouted with <code>route!</code> or setindex!.</p><h2 id="servables"><a class="docs-heading-anchor" href="#servables">servables</a><a id="servables-1"></a><a class="docs-heading-anchor-permalink" href="#servables" title="Permalink"></a></h2><p>Servables are any type that has a Function <code>f</code>, which takes a Connection. In the scope of toolips&#39; base, this includes the <code>File</code> Servable and sub-types of <code>AbstractComponent</code>, which includes <code>Component</code>, <code>Style</code>, and <code>Animation</code>.</p><pre><code class="language-julia">using Toolips
+comp = div(&quot;mydiv&quot;, text = &quot;hello world!&quot;)
+typeof(comp)</code></pre><pre class="documenter-example-output">Component{:div}</pre><p>Components are most often created via the various Component methods available across the toolips ecosystem, but can also be created via the <code>Component</code> constructor.</p><pre><code class="language-julia">using Toolips
+comp = Component(&quot;myb&quot;, &quot;b&quot;, &quot;align&quot; =&gt; &quot;center&quot;)
+show(comp)</code></pre><pre class="documenter-example-output">myb (b)
+children = Servable[]align = center
+children</pre><p>Components take an infinite number of arguments which are HTML attributes. In the example above, we set the align of our <code>myb</code> to <code>center</code>. There are also more methods for this type, such as <code>style!</code>, <code>animate!</code>, <code>push!</code>, and more where</p><ul><li><strong>style!</strong> sets the <code>Style</code> of a <code>Component</code>, or styles a Component with <code>Pairs</code>.</li><li><strong>animate!</strong> animates a <code>Component</code> with an <code>Animation</code>.</li><li><strong>push!</strong> composes a <code>Component</code> into another <code>Component</code>.</li></ul><pre><code class="language-julia">using Toolips
+
+function home(c::Connection)
+  examplepdiv = div(&quot;examplepdiv&quot;)
+  style!(examplepdiv, &quot;border-width&quot; =&gt; 2px, &quot;border-style&quot; =&gt; &quot;solid&quot;, &quot;border-color&quot; =&gt; &quot;lightblue&quot;) # &lt;- Styles examplepdiv
+  myp = p(&quot;exampleb&quot;, text = &quot;hello world!&quot;)
+  push!(examplepdiv, myp) # &lt;- puts myb into examplepdiv
+  write!(c, examplepdiv)
+end</code></pre><pre class="documenter-example-output">home (generic function with 1 method)</pre>$examplepdiv<h2 id="extensions"><a class="docs-heading-anchor" href="#extensions">extensions</a><a id="extensions-1"></a><a class="docs-heading-anchor-permalink" href="#extensions" title="Permalink"></a></h2><p>Extensions are the bread to the butter of toolips. These are all sub-types of the <code>ServerExtension</code> type. Two examples of extensions from toolips are the <code>Files</code> and <code>Logger</code> extensions. These are typically provided to <code>ToolipsServer</code> constructors using the <code>extensions</code> key-word argument.</p><pre><code class="language-julia">using Toolips
+
+ws = WebServer(&quot;127.0.0.1&quot;, 8000, extensions = [Logger(), Files()])
+show(ws)</code></pre><pre class="documenter-example-output">WebServer
+hosted at: http://127.0.0.1:8000
+status: inactive
+    routes
+    /
+
+    extensions
+    Logger
+Files</pre><p>Some extensions will be loaded into the <code>Connection</code>, some extensions modify the routes of a given <code>Connection</code>, and some extensions</p><pre><code class="language-julia">using Toolips
+show(Logger().type); print(&quot;\n&quot;)
+show(Files().type)</code></pre><pre class="documenter-example-output">:connection
+:routing</pre><p>An extension can also be of multiple types by using a <code>Vector{Symbol}</code>, as is the case with Session, for example.</p><pre><code class="language-julia">using Toolips
+using ToolipsSession
+show(Session().type)</code></pre><pre class="documenter-example-output">[:connection, :func, :routing]</pre><pre><code class="language-julia">using Toolips
+ws = WebServer(&quot;127.0.0.1&quot;, 8000, extensions = [Logger(), Files()])</code></pre><pre class="documenter-example-output"></pre><h2 id="servers"><a class="docs-heading-anchor" href="#servers">servers</a><a id="servers-1"></a><a class="docs-heading-anchor-permalink" href="#servers" title="Permalink"></a></h2><p>Servers take your routes and start them using the <code>ToolipsServer.start()</code> method. We have the option to build a server with either a <code>WebServer</code> or a <code>ServerTemplate</code>. Of course, we can also create our own servers by following the consistencies of <code>ToolipsServer</code>. These constructors will take our routes, extensions, ip and port, and make a start/stoppable object</p><pre><code class="language-julia">using Toolips
+
+ws = WebServer(&quot;127.0.0.1&quot;, 8000, extensions = [Logger(), Files()])
+show(ws); print(&quot;\n\n&quot;)</code></pre><pre class="documenter-example-output">WebServer
+hosted at: http://127.0.0.1:8000
+status: inactive
+    routes
+    /
+
+    extensions
+    Logger
+Files</pre><p>Similar to a Connection, we can access extensions by indexing <code>Symbols</code> and routes by indexing <code>Strings</code>.</p><pre><code class="language-julia">using Toolips
+
+ws = WebServer(&quot;127.0.0.1&quot;, 8000, extensions = [Logger(), Files()])
+ws[:Logger].log(&quot;hello!&quot;)</code></pre><pre class="documenter-example-output">[37;1m[[35;1m2022:08:04:01:25[37;1m]: [94;1m🌷 toolips&gt; [96mhello!
+[34m</pre><h1 id="creating-web-apps"><a class="docs-heading-anchor" href="#creating-web-apps">creating web-apps</a><a id="creating-web-apps-1"></a><a class="docs-heading-anchor-permalink" href="#creating-web-apps" title="Permalink"></a></h1><p>Creating a web-app with toolips using the <code>new_webapp</code> method will add the extensions <code>Files</code> and <code>Session</code> to your server. The <code>Files</code> extension adds routes to your server for files stored inside of a particular directory, and the <code>Session</code> extension is used to bring full-stack functionality to toolips.</p><h2 id="files"><a class="docs-heading-anchor" href="#files">files</a><a id="files-1"></a><a class="docs-heading-anchor-permalink" href="#files" title="Permalink"></a></h2><p>Handling files with the <code>Files</code> extension is incredibly easy, simply add <code>Files(::String)</code> where the single positional argument is your directory from your project folder; by default this is <code>public</code>.</p><pre><code class="language-">ws = WebServer(&quot;127.0.0.1&quot;, 8000, extensions = [Logger(), Files()])</code></pre><h2 id="session"><a class="docs-heading-anchor" href="#session">session</a><a id="session-1"></a><a class="docs-heading-anchor-permalink" href="#session" title="Permalink"></a></h2></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« toolips</a><a class="docs-footer-nextpage" href="../core/">core »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 4 August 2022 01:25">Thursday 4 August 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
