@@ -1,0 +1,8 @@
+name = "ExampleApp"
+uuid = "4330b6cf-7161-4e1a-acfb-00cf33be3a7e"
+authors = ["emmac <emmettgb@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+Toolips = "a47e2ad8-fcf7-417c-9746-32b9bdf220bd"

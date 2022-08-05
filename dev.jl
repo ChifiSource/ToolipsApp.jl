@@ -10,11 +10,13 @@ using ToolipsRemote
 using ToolipsUploader
 using Revise
 using ToolipsApp
+using Base.Threads: @spawn
+include("src/ToolipsDocs.jl")
+using Main.ToolipsDocs
 
+DOCIP = "127.0.0.1"
+DOCPORT = 8001
 IP = "127.0.0.1"
 PORT = 8000
-
-
-extensions = [Logger(), Session(["/", "/extensions"]), Files(), Remote(), Uploader()]
-
-ToolipsAppServer = ToolipsApp.start(IP, PORT, extensions)
+ToolipsAppServer = ToolipsApp.start(IP, PORT)
+ToolipsDocsServer = ToolipsDocs.start(DOCIP, DOCPORT)

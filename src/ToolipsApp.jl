@@ -15,13 +15,14 @@ using Toolips
 using ToolipsSession
 using ToolipsDefaults
 using ToolipsUploader
+using ToolipsRemote
 using ToolipsBase64
 using ToolipsMarkdown
 using ToolipsMarkdown: @tmd_str
 include("home.jl")
 
 """
-### rerooute(ws::WebServer)
+### reroute(ws::WebServer)
 This function updates the routes with the files available during server operation.
 You can of course still create routes in Connections and with the web-server.
 This is meant to be used when developing a project, really, as it allows you to
@@ -46,13 +47,13 @@ ToolipsApp.reroute!(ws)
 function reroute!(ws::WebServer)
     route!(ws, "/", main)
 end
-
-function start(IP::String = "127.0.0.1", PORT::Integer = 8000,
-    extensions::Vector = [Session(), Logger()])
-    homeroute = route("/", main)
-    fourofour = route("404", notapage)
-    rs = routes(homeroute, fourofour)
-    server = ServerTemplate(IP, PORT, rs, extensions = extensions)
+homeroute = route("/", main)
+fourofour = route("404", notapage)
+rs = routes(homeroute, fourofour)
+extensions = [Logger(), Session(["/", "/extensions"]), Files("public/tlapp"), Remote(), Uploader()]
+function start(IP::String = "127.0.0.1", PORT::Integer = 8000)
+    server = WebServer(IP, PORT, routes = rs, extensions = extensions)
     server.start()
+    server
 end
 end # - module

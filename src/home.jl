@@ -198,7 +198,7 @@ function main(c::Connection)
      #==
      Change pages
      ==#
-    on_keydown(c, "ArrowLeft") do cm::ComponentModifier
+    on_keydown(c, "ArrowLeft", ["maincontainer"]) do cm::ComponentModifier
         # get new pages
         selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
         selpage = tlapp_pages[selpagei][2](c)
@@ -239,7 +239,7 @@ function main(c::Connection)
         end
         set_text!(cm, tlapp_title, "$(pagebehind.name) | toolips app !")
     end
-    on_keydown(c, "ArrowRight") do cm::ComponentModifier
+    on_keydown(c, "ArrowRight", ["maincontainer"]) do cm::ComponentModifier
         # get new pages
         selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
         selpage = tlapp_pages[selpagei][2](c)
@@ -256,7 +256,7 @@ function main(c::Connection)
         # update attribute
         cm[containerdiv] = "page" => pageinfront.name
         # callback for when transition completes
-        observe!(c, cm, "obsl") do cm::ComponentModifier
+        observe!(c, cm, "obsr") do cm::ComponentModifier
             selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
             selpage = tlapp_pages[selpagei][2](c)
             pagebehind = tlapp_pages[selpagei - 1][2](c)
