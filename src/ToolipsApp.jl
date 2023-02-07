@@ -14,11 +14,9 @@ module ToolipsApp
 using Toolips
 using ToolipsSession
 using ToolipsDefaults
-using ToolipsUploader
 using ToolipsRemote
 using ToolipsBase64
 using ToolipsMarkdown
-using ToolipsMarkdown: @tmd_str
 include("home.jl")
 
 """
@@ -50,7 +48,7 @@ end
 homeroute = route("/", main)
 fourofour = route("404", notapage)
 rs = routes(homeroute, fourofour)
-extensions = [Logger(), Session(["/", "/extensions"]), Files("public/tlapp"), Remote(), Uploader()]
+extensions = [Logger(), Session(["/", "/extensions"]), Files("public/tlapp"), Remote()]
 function start(IP::String = "127.0.0.1", PORT::Integer = 8000)
     server = WebServer(IP, PORT, routes = rs, extensions = extensions)
     server.start()

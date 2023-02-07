@@ -16,6 +16,7 @@ Use your right and left arrow keys to navigate the different showcases!
 - **Declarative**, high-level syntax.
 - **Asynchronous**. Run multiple functions at the same time as you serve to each incoming request.
 - **Versatile**. Toolips.jl can be used for all scenarios, from full-stack web-development to APIs.
+
 ```julia
 using Pkg; Pkg.add("Toolips")
 ```
@@ -144,7 +145,6 @@ function main(c::Connection)
     #==
     Universal app
     ==#
-    tlappcursor = ToolipsDefaults.cursor("tlappcursor")
       leftkeybox = kbd("leftkeybox", text = "<-")
       style!(leftkeybox, "display" => "inline-block")
       rightkeybox = kbd("rightkeybox", text = "->", align = "left")
@@ -165,7 +165,7 @@ function main(c::Connection)
       "font-weight" => "bold !important", "margin" => "10px", "color" => "#8b7dc1")
       push!(keybindings, leftkeybox, leftkeybuttoncomp, midbuttoncomp, rightkeybuttoncomp, rightkeybox )
       bod = body("toolips_app")
-      push!(bod, keybindings, tlappcursor)
+      push!(bod, keybindings)
       #==
       pages
       ==#
@@ -198,7 +198,7 @@ function main(c::Connection)
      #==
      Change pages
      ==#
-    on_keydown(c, "ArrowLeft", ["maincontainer"]) do cm::ComponentModifier
+    bind!(c, "ArrowLeft") do cm::ComponentModifier
         # get new pages
         selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
         selpage = tlapp_pages[selpagei][2](c)
@@ -215,7 +215,7 @@ function main(c::Connection)
         # update attribute
         cm[containerdiv] = "page" => pagebehind.name
         # callback for when transition completes
-        observe!(c, cm, "obsl") do cm::ComponentModifier
+        next!(c, selpage, cm) do cm::ComponentModifier
             selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
             selpage = tlapp_pages[selpagei][2](c)
             pagebehind = tlapp_pages[selpagei - 1][2](c)
@@ -224,7 +224,6 @@ function main(c::Connection)
             set_text!(cm, leftkeybuttoncomp, pagebehind.name)
             set_text!(cm, midbuttoncomp, selpage.name)
             set_text!(cm, rightkeybuttoncomp, pageinfront.name)
-            sleep(.8)
             style!(pageinfront, "overflow-x" => "hidden !important",
             "width" => "0", "transition" => "0s", "margin" => "0px !important", "opacity" => "0%", "margin-left" => "100%",
             "margin-top" => 10px, "padding" => 0px, "display" => "inline-block !important",
@@ -239,12 +238,12 @@ function main(c::Connection)
         end
         set_text!(cm, tlapp_title, "$(pagebehind.name) | toolips app !")
     end
-    on_keydown(c, "ArrowRight", ["maincontainer"]) do cm::ComponentModifier
+    bind!(c, "ArrowRight") do cm::ComponentModifier
         # get new pages
         selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
         selpage = tlapp_pages[selpagei][2](c)
-        pagebehind = tlapp_pages[selpagei - 1][2](c)
-        pageinfront = tlapp_pages[selpagei + 1][2](c)
+        pagebehind = tlapp_pages[selpagei + 1][2](c)
+        pageinfront = tlapp_pages[selpagei - 1][2](c)
         # change the styles:
         style!(cm, pageinfront,  "transition" => ".8s", "overflow-y" => "scroll",
         "display" => "inline-block !important", "width" => 100percent, "opacity" => 100percent, "position" => "relative",
@@ -256,7 +255,7 @@ function main(c::Connection)
         # update attribute
         cm[containerdiv] = "page" => pageinfront.name
         # callback for when transition completes
-        observe!(c, cm, "obsr") do cm::ComponentModifier
+        next!(c, selpage, cm) do cm::ComponentModifier
             selpagei = findall(x -> x[1] == cm[containerdiv]["page"], tlapp_pages)[1]
             selpage = tlapp_pages[selpagei][2](c)
             pagebehind = tlapp_pages[selpagei - 1][2](c)

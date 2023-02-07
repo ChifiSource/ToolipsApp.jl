@@ -31,7 +31,7 @@ end
 #==
 Toolips
     Uploader
-==#
+=
 uploader_logo = img("uploaderlogo", src = "toolips/toolipsuploader.png", width = 200)
 uploader_vlink = tmd"""[![version](https://juliahub.com/docs/Toolips/version.svg)](https://juliahub.com/ui/Packages/Toolips/TrAr4)"""
 uploader_tmd = tmd"""# Uploader
@@ -41,6 +41,7 @@ markdown file, and the markdown file is prompty returned into a div with
 toolips markdown. The module includes both a polling file uploader and a regular
 uploader, for all of your uploading needs. Best of all, the FileModifier cleans
 up any files that are created by Uploader unless you copy them away!"""
+==#
 
 """
 gallery(c::Connection) -> _
@@ -75,21 +76,21 @@ function gallery(c::Connection)
     ==#
     session_example = section()
     session_tmd = tmd"""# Toolips Session
-    Toolips session provides toolips with full-stack capabilities using declarative
-    mutating syntax. The module primarily provides the method `on`, along with
-    the `Session` extension and `Modifier` abstract type. Modifiers are passed
-    as an argument to functions that are recieved using event functions, such
-    as `on`.
-    ```julia
-    function home(c::Connection)
-            on(c, "load") do cm::ComponentModifier
-                    alert!(cm, "loaded!")
-            end
+Toolips session provides toolips with full-stack capabilities using declarative
+mutating syntax. The module primarily provides the method `on`, along with
+the `Session` extension and `Modifier` abstract type. Modifiers are passed
+as an argument to functions that are recieved using event functions, such
+as `on`.
+```julia
+function home(c::Connection)
+    on(c, "load") do cm::ComponentModifier
+        alert!(cm, "loaded!")
     end
-    ```
-    The Session extension tracks individual client's events with an iptable.
-    This allows for the creation of one-page websites and interactivity without
-            the need for making any sort of GET requests."""
+end
+```
+The Session extension tracks individual client's events with an iptable.
+This allows for the creation of one-page websites and interactivity without
+the need for making any sort of GET requests."""
 
     sessionsection = extension_section("session", "toolips/toolipssession.png",
             session_tmd, session_example)
@@ -108,9 +109,9 @@ function gallery(c::Connection)
     it with ColorSchemes, and edit it like any other Style Component to set the
     default styles for our website. For example, in the ToolipsApp.jl module
         (the website you are on, welcome)
-        ```julia
-        s = sheet("mystyle")
-        ```
+    ```julia
+    s = sheet("mystyle")
+    ```
     ## Default Components
     Toolips defaults provides a number of default components, as well a
     functions for [ToolipsSession](/?page=extensions&selected=session), `update!`.
@@ -166,7 +167,7 @@ function gallery(c::Connection)
     push!(sections, b64section)
     #==
     Uploader
-    ==#
+
     uploadersection = section("uploader", align = "left")
     uploaderbox = div("uploaderbox")
     style!(uploaderbox, "background-color" => "white", "border-style" => "solid",
@@ -190,6 +191,7 @@ function gallery(c::Connection)
     push!(uploadersection, uploader_logo, uploader_vlink, uploader_tmd,
      myuploader, uploaderbox)
      push!(sections, uploadersection)
+     ==#
      #==
      Memwrite
      ==#
@@ -232,16 +234,6 @@ function gallery(c::Connection)
      exportsection = extension_section("export", "toolips/toolipsexport.png",
              export_tmd, export_example)
      push!(sections, exportsection)
-     #==
-     Multiple Dispatch
-     ==#
-     dispatch_example = section()
-     dispatch_tmd = tmd"""# Toolips Multiple Dispatch
-     Toolips Multiple dispatch is still a **work in progress**.
-     """
-     dispatchsection = extension_section("dispatch", "toolips/toolipsmultipledispatch.png",
-             dispatch_tmd, dispatch_example)
-     push!(sections, dispatchsection)
      #==
      UDP
      ==#
@@ -292,26 +284,6 @@ function gallery(c::Connection)
      interpolatorsection = extension_section("interpolator", "toolips/toolipsinterpolator.png",
              interpolator_tmd, interpolator_example)
      push!(sections, interpolatorsection)
-     #==
-     ptp
-     ==#
-     ptp_example = section()
-     ptp_tmd = tmd"""# Toolips Peer to Peer
-     Toolips PTP is still a **work in progress**.
-     """
-     ptpsection = extension_section("ptp", "toolips/toolipsptp.png",
-             ptp_tmd, ptp_example)
-     push!(sections, ptpsection)
-     #==
-     canvas
-     ==#
-     canvas_example = section()
-     canvas_tmd = tmd"""# Toolips Canvas
-     Toolips PTP is still a **work in progress**. (this one is going to be a while...)
-     """
-     canvassection = extension_section("canvas", "toolips/toolipscanvas.png",
-             canvas_tmd, canvas_example)
-     push!(sections, canvassection)
      #==
      auth
      ==#
